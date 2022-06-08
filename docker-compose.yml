@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  web:
+    build: ./frontend
+    ports:
+      - "8000:3000"
+    volumes:
+      - ./frontend:/opt/app
+    links:
+      - backend
+  
+  backend:
+    build: ./backend
+    ports:
+      - "8080:3000"
+    volumes:
+      - ./backend:/opt/app
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: cs5279
+      MYSQL_PASSWORD: 8t3kvpMqz6Kb
+      MYSQL_DB: cs5279
+    links:
+      - db
+  
+  db:
+    build: ./db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cs5279
+    volumes:
+      - ./mysqldata:/var/lib/mysql
