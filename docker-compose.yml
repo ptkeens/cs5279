@@ -12,9 +12,10 @@ services:
   backend:
     build: ./backend
     ports:
-      - "8080:3000"
+      - "8080:80"
     volumes:
       - ./backend:/opt/app
+    command: npm run start:dev
     environment:
       MYSQL_HOST: db
       MYSQL_USER: cs5279
